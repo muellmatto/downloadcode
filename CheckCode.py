@@ -12,11 +12,16 @@ def check(code=None):
 
 
 
+
 def count(code=None):
     anzahl=1
     return str(anzahl)
     # Diese Funktion Muss später Anzahl der Downloads für
     # den gewählten code zurück geben
+
+
+
+
 
 def CodeAnzahlVerringern(code=None):
     return 0
