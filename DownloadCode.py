@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf8 -*-
 
 import cherrypy
@@ -19,6 +19,7 @@ class DownloadCode:
     def CheckCode(self, code=None):
         self.check=CheckCode.check(code)
         self.count=CheckCode.count(code)
+        self.code=code
         if self.check == 0:
             return "Dein Code ist falsch"
         elif self.check == 1:
@@ -27,16 +28,16 @@ class DownloadCode:
                     <p><input type="submit" value="Download"/></p> \
                     </form>'
         else:
-            return "Da ist was schief gegangen.... check=" + str(self.check) + " count=" + str(self.count) + " code=" + code
+            return "Da ist was schief gegangen... :("
     CheckCode.exposed = True
 
     def Download(self, check=None, code=None):
-        if check == 1:
+        if self.check == 1:
             CheckCode.CodeAnzahlVerringern(code)
-            datei="/home/matto/python/cherrypy/tutorial/test.zip"
+            datei="/home/matto/python/cherrypy/tutorial/downloadcode/test.zip"
             return cherrypy.lib.static.serve_file(datei, content_type=None, disposition=None, name="DAMNiAM-MADAMIN.zip", debug=False) 
         else:
-            return "Da ist was schief gegangen.... check=" + str(self.check) + " count=" + str(self.count) + " code=" + code
+            return "Da ist was schief gegangen.... check=" + str(self.check) + " count=" + str(self.count) + " code=" + self.code
     Download.exposed = True
 
 
